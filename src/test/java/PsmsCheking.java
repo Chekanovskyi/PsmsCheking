@@ -1,5 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,7 +6,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -26,7 +24,7 @@ VerificationLogic verification = new VerificationLogic();
     public long dateTime;
     public int maxLimitEntarence=7;
     public int countOfEntarence;
-    public boolean isElementPresetn;
+    public boolean isElementPresetn=false;
     protected  int actualCount=0;
 
     public long generateDateEmail() {
@@ -48,10 +46,13 @@ VerificationLogic verification = new VerificationLogic();
     }
 
 
+
     @Test(dataProvider = "psmsSitesUrl")
     public void psmsPresents(String siteUrl) throws InterruptedException {
         driver.get("https://www."+siteUrl+".com/?utm_source=int");
-
+        Cookie ck = new Cookie("ip_address", "213.171.197.181");
+        driver.manage().addCookie(ck);
+        driver.navigate().refresh();
         WebElement waiting = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@id='submit_button']")));
 
@@ -103,13 +104,18 @@ VerificationLogic verification = new VerificationLogic();
     skipConfirm.click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(siteUrl+"/pay");
-        for(int i=0; i<=maxLimitEntarence; i++){
+        for(int i=2; i<=maxLimitEntarence; i++){
            waiting = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/a[@href='/pay/page/verifiedByVisa']")));
             String pageSource = driver.getCurrentUrl();
+
              driver.get(pageSource+i);
-             actualCount=+i;
-           if (verification.isElementPresent(By.xpath("//div//li[@data-type='sms']")))
-               break;
+            try {
+                if (!driver.findElement(By.xpath("//div//li[@data-type='sms']")).isDisplayed())
+           actualCount=+i;
+                }
+            catch (NoSuchElementException e){
+            continue;
+                }
              }
              }
 
