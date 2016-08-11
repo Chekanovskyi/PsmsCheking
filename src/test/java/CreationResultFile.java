@@ -14,10 +14,11 @@ import java.util.List;
 
 public class CreationResultFile {
 
+    public List<TestResultFileds> dataModels = new ArrayList<TestResultFileds>();
+    CreationResultFile creationResultFile = new CreationResultFile();
     TestResultFileds testRes = new TestResultFileds();
     private List<TestResultFileds> recordTestResult(String nameOfCurrentSite, String  testLocations, int countOfVisits, boolean resultOfChekin) {
-        List<TestResultFileds> dataModels = new ArrayList<TestResultFileds>();
-        dataModels.add(new TestResultFileds(nameOfCurrentSite,testLocations,countOfVisits,resultOfChekin));
+               dataModels.add(new TestResultFileds(nameOfCurrentSite,testLocations,countOfVisits,resultOfChekin));
         return dataModels;
     }
     public void createExelFile(String fileName){
@@ -29,7 +30,15 @@ public class CreationResultFile {
         row.createCell(1).setCellValue("Location");
         row.createCell(2).setCellValue("Count of different vias");
         row.createCell(3).setCellValue("Test result");
+        int count = dataModels.size();
 
+        for (int i=0;count==i; i++){
+          Row resultRow = sheet.createRow(i+1);
+            resultRow.createCell(0).setCellValue(dataModels.get(i).getNameOfCurrentSite());
+            resultRow.createCell(1).setCellValue(dataModels.get(i).getTestLocations());
+            resultRow.createCell(2).setCellValue(dataModels.get(i).getCountOfVisits());
+            resultRow.createCell(3).setCellValue(dataModels.get(i).isResultOfCheking());
+        }
 
                // записываем созданный в памяти Excel документ в файл
         try (FileOutputStream out = new FileOutputStream(new File("E:\results\fileName.xls"))) {
@@ -44,4 +53,4 @@ public class CreationResultFile {
 
 
 
-}
+
