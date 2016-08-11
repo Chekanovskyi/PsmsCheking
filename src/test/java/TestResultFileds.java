@@ -28,8 +28,10 @@ public class TestResultFileds {
         return countOfVisits;
     }
 
-    public boolean isResultOfCheking() {
-        return resultOfCheking;
+    public String isResultOfCheking() {
+        if (resultOfCheking == true)
+        return "PASS";
+        else return "FAILED";
     }
 
     public void setNameOfCurrentSite(String nameOfCurrentSite) {
