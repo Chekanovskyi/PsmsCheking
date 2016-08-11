@@ -2,23 +2,31 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.List;
+
 /**
  * Created by Alexandr on 04.08.2016.
  */
 public class VerificationLogic {
-    private WebDriver driver;
-
+    private  WebDriver driver;
+String testResult [];
+    String resultOfPsmsTest;
     public boolean isElementPresent(By locatorKey) {
-        try {
-
-            driver.findElement(locatorKey);
+                   if (driver.findElement(locatorKey).isEnabled())
             return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
+        else
             return false;
         }
-    }
 
-    public boolean isElementVisible(String cssLocator){
-        return driver.findElement(By.cssSelector(cssLocator)).isDisplayed();
-    }
+
+ public void generateTestResultFile(String siteName, String location, int whenAppear, boolean resultOfTest){
+if (resultOfTest) {
+    String resultOfPsmsTest = "PASS";
+}
+     else {
+    String resultOfPsmsTest = "FAILED";
+}
+    String testResult = siteName+", "+location+", "+whenAppear+", "+ resultOfPsmsTest;
+ }
+
 }
