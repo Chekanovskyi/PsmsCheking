@@ -36,7 +36,7 @@ VerificationLogic verification = new VerificationLogic();
     @DataProvider(name ="psmsSitesUrl")
     public Object [][] getUrel()
     { return new Object[][]{
-            {"naughtyavenue"},
+            new Object[]{"naughtyavenue", "213.171.197.181", "4673326545", "GBR"},
             {"getnaughty"},
     };
     }
@@ -48,9 +48,9 @@ VerificationLogic verification = new VerificationLogic();
 
 
     @Test(dataProvider = "psmsSitesUrl")
-    public void psmsPresents(String siteUrl) throws InterruptedException {
+    public void psmsPresents(String siteUrl, String ipAdress, String telephoneNumber, String locations) throws InterruptedException {
         driver.get("https://www."+siteUrl+".com/?utm_source=int");
-        Cookie ck = new Cookie("ip_address", "213.171.197.181");
+        Cookie ck = new Cookie("ip_address", ipAdress);
         driver.manage().addCookie(ck);
         driver.navigate().refresh();
         WebElement waiting = (new WebDriverWait(driver, 10))
@@ -76,7 +76,7 @@ VerificationLogic verification = new VerificationLogic();
         locationField.click();
         locationField.clear();
 
-        locationField.sendKeys("33445");
+        locationField.sendKeys("London");
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -112,12 +112,20 @@ VerificationLogic verification = new VerificationLogic();
             try {
                 if (!driver.findElement(By.xpath("//div//li[@data-type='sms']")).isDisplayed())
            actualCount=+i;
-                }
+                else break;
+            }
             catch (NoSuchElementException e){
             continue;
                 }
              }
-             }
+        WebElement psmsTab = driver.findElement(By.xpath("//div//li[@data-type='sms']"));
+        psmsTab.click();
+        if (locations=="GBR"){
+WebElement
+        }
+        WebElement phoneImmput = driver.findElement(By.xpath("//input[@name='SmsPaymentForm[phone_number]']"));
+        phoneImmput.sendKeys(telephoneNumber);
+}
 
 
 }
