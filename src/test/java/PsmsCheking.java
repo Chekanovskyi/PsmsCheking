@@ -25,13 +25,15 @@ VerificationLogic verification = new VerificationLogic();
     public int maxLimitEntarence=7;
     public int countOfEntarence;
     public boolean isElementPresetn=false;
-    protected  int actualCount=0;
+    public boolean testResultIs;
+    protected  int actualCount;
 
     public long generateDateEmail() {
         Calendar mills = new GregorianCalendar();
         return dateTime = (mills.getTimeInMillis());
 
     }
+    CreationResultFile createResultFile = new CreationResultFile();
 
     @DataProvider(name ="psmsSitesUrl")
     public Object [][] getUrel()
@@ -42,8 +44,11 @@ VerificationLogic verification = new VerificationLogic();
     }
     @BeforeTest
     public void setupTest(){
+        actualCount=0;
+        testResultIs = false;
         driver = new FirefoxDriver();
     }
+
 
 
 
@@ -121,10 +126,12 @@ VerificationLogic verification = new VerificationLogic();
         WebElement psmsTab = driver.findElement(By.xpath("//div//li[@data-type='sms']"));
         psmsTab.click();
         if (locations=="GBR"){
-WebElement
+//WebElement
         }
         WebElement phoneImmput = driver.findElement(By.xpath("//input[@name='SmsPaymentForm[phone_number]']"));
         phoneImmput.sendKeys(telephoneNumber);
+        createResultFile.recordTestResult(siteUrl,locations,actualCount,testResultIs);
+
 }
 
 
