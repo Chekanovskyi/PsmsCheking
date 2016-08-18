@@ -39,7 +39,14 @@ VerificationLogic verification = new VerificationLogic();
     public Object [][] getUrel()
     { return new Object[][]{
             new Object[]{"naughtyavenue", "213.171.197.181", "4673326545", "GBR"},
-            {"getnaughty"},
+            {"naughtyavenue", "213.171.197.181", "4673326545", "AUS"},
+            {"naughtyavenue", "213.171.197.181", "4673326545", "SWE"},
+            {"naughtyavenue", "213.171.197.181", "4673326545", "NOR"},
+            {"getnaughty", "213.171.197.181", "4673326545", "GBR"},
+            {"getnaughty", "213.171.197.181", "4673326545", "AUS"},
+            {"getnaughty", "213.171.197.181", "4673326545", "SWE"},
+            {"getnaughty", "213.171.197.181", "4673326545", "NOR"},
+
     };
     }
     @BeforeTest
@@ -130,6 +137,11 @@ VerificationLogic verification = new VerificationLogic();
         }
         WebElement phoneImmput = driver.findElement(By.xpath("//input[@name='SmsPaymentForm[phone_number]']"));
         phoneImmput.sendKeys(telephoneNumber);
+        WebElement payByMobileBTN = driver.findElement(By.xpath(""));
+        payByMobileBTN.click();
+        if (driver.findElement(By.xpath("")).isEnabled()){
+
+        }
         createResultFile.recordTestResult(siteUrl,locations,actualCount,testResultIs);
 
 }
