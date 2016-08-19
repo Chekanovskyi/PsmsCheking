@@ -25,25 +25,37 @@ VerificationLogic verification = new VerificationLogic();
     public int maxLimitEntarence=7;
     public int countOfEntarence;
     public boolean isElementPresetn=false;
-    protected  int actualCount=0;
+    public boolean testResultIs;
+    protected  int actualCount;
 
     public long generateDateEmail() {
         Calendar mills = new GregorianCalendar();
         return dateTime = (mills.getTimeInMillis());
 
     }
+    CreationResultFile createResultFile = new CreationResultFile();
 
     @DataProvider(name ="psmsSitesUrl")
     public Object [][] getUrel()
     { return new Object[][]{
             new Object[]{"naughtyavenue", "213.171.197.181", "4673326545", "GBR"},
-            {"getnaughty"},
+            {"naughtyavenue", "213.171.197.181", "4673326545", "AUS"},
+            {"naughtyavenue", "213.171.197.181", "4673326545", "SWE"},
+            {"naughtyavenue", "213.171.197.181", "4673326545", "NOR"},
+            {"getnaughty", "213.171.197.181", "4673326545", "GBR"},
+            {"getnaughty", "213.171.197.181", "4673326545", "AUS"},
+            {"getnaughty", "213.171.197.181", "4673326545", "SWE"},
+            {"getnaughty", "213.171.197.181", "4673326545", "NOR"},
+
     };
     }
     @BeforeTest
     public void setupTest(){
+        actualCount=0;
+        testResultIs = false;
         driver = new FirefoxDriver();
     }
+
 
 
 
@@ -121,10 +133,17 @@ VerificationLogic verification = new VerificationLogic();
         WebElement psmsTab = driver.findElement(By.xpath("//div//li[@data-type='sms']"));
         psmsTab.click();
         if (locations=="GBR"){
-WebElement
+//WebElement
         }
         WebElement phoneImmput = driver.findElement(By.xpath("//input[@name='SmsPaymentForm[phone_number]']"));
         phoneImmput.sendKeys(telephoneNumber);
+        WebElement payByMobileBTN = driver.findElement(By.xpath(""));
+        payByMobileBTN.click();
+        if (driver.findElement(By.xpath("")).isEnabled()){
+
+        }
+        createResultFile.recordTestResult(siteUrl,locations,actualCount,testResultIs);
+
 }
 
 

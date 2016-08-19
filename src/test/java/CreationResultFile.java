@@ -17,7 +17,7 @@ public class CreationResultFile {
     public List<TestResultFileds> dataModels = new ArrayList<TestResultFileds>();
     CreationResultFile creationResultFile = new CreationResultFile();
     TestResultFileds testRes = new TestResultFileds();
-    private List<TestResultFileds> recordTestResult(String nameOfCurrentSite, String  testLocations, int countOfVisits, boolean resultOfChekin) {
+    public List<TestResultFileds> recordTestResult(String nameOfCurrentSite, String  testLocations, int countOfVisits, boolean resultOfChekin) {
                dataModels.add(new TestResultFileds(nameOfCurrentSite,testLocations,countOfVisits,resultOfChekin));
         return dataModels;
     }
