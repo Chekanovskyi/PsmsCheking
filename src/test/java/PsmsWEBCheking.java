@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Alexandr on 19.07.2016.
  */
-public class PsmsCheking {
+public class PsmsWEBCheking {
 VerificationLogic verification = new VerificationLogic();
     private WebDriver driver;
     private String baseUrl;
