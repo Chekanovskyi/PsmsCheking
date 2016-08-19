@@ -38,14 +38,7 @@ VerificationLogic verification = new VerificationLogic();
     @DataProvider(name ="psmsSitesUrl")
     public Object [][] getUrel()
     { return new Object[][]{
-            new Object[]{"naughtyavenue", "213.171.197.181", "4673326545", "GBR"},
-            {"naughtyavenue", "213.171.197.181", "4673326545", "AUS"},
-            {"naughtyavenue", "213.171.197.181", "4673326545", "SWE"},
-            {"naughtyavenue", "213.171.197.181", "4673326545", "NOR"},
-            {"getnaughty", "213.171.197.181", "4673326545", "GBR"},
-            {"getnaughty", "213.171.197.181", "4673326545", "AUS"},
-            {"getnaughty", "213.171.197.181", "4673326545", "SWE"},
-            {"getnaughty", "213.171.197.181", "4673326545", "NOR"},
+            new Object[]{",
 
     };
     }
